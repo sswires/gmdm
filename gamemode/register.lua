@@ -1,0 +1,1 @@
+RegisterGamemode( "GMDM Redux", "gmdm", {"gm_","dm_","cs_","de_","dod_","gmdm_"} );

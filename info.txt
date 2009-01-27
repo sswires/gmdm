@@ -1,0 +1,15 @@
+"Gamemode"
+{
+	"name"		"GMDM Redux"
+	"version"	"1.0.3"
+
+	"author_name"	"TEAM GMDM"
+	"author_email"	""
+	"author_url"	"http://s-swires.org/gmdmredux/"
+	
+	"icon"		""
+	"info"		""
+	"hide"		"0"
+
+	"override"		"1"
+}
