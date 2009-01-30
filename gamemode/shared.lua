@@ -59,7 +59,7 @@ function GM:GetModeDescription()
 
 	local prefix = "";
 	
-	if( gmdm_headshotmode:GetBool() ) then
+	if( gmdm_headshotmode and gmdm_headshotmode:GetBool() ) then
 		prefix = prefix .. "Headshots only "
 	end
 	
@@ -67,15 +67,15 @@ function GM:GetModeDescription()
 		prefix = prefix .. "Team ";
 	end
 	
-	if( gmdm_soulcollector:GetBool() ) then
+	if( gmdm_soulcollector and gmdm_soulcollector:GetBool() ) then
 		if( gmdm_instagib:GetInt() > 0 ) then
 			return prefix .. "Soul Collector Insta-gib";
 		else
 			return prefix .. "Soul Collector";
 		end
-	elseif( gmdm_instagib:GetInt() > 1 ) then
+	elseif( gmdm_instagib and gmdm_instagib:GetInt() > 1 ) then
 		return prefix .. "Instagib"
-	elseif( gmdm_instagib:GetInt() == 1 ) then
+	elseif( gmdm_instagib and gmdm_instagib:GetInt() == 1 ) then
 		return prefix .. "One Shot, One Kill DM"
 	else
 		return prefix .. "Deathmatch"
