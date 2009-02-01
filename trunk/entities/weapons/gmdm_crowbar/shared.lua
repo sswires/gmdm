@@ -25,6 +25,10 @@ SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "none"
+SWEP.CanSprintAndShoot		= true;
+
+SWEP.ConstantAccuracy	= true
+SWEP.Primary.Cone		= 0.0;
 
 function SWEP:PrimaryAttack( )
 	
@@ -46,7 +50,7 @@ function SWEP:PrimaryAttack( )
 
 		if( tTraceRes.Entity == nil ) then
 			Msg( "hitent was nil\n" )
-		elseif( tTraceRes.Entity and ( tTraceRes.HitPos - self.Owner:GetPos() ):Length() < 80 ) then
+		elseif( tTraceRes.Entity and ( tTraceRes.HitPos - self.Owner:GetPos() ):Length() < 95 ) then
 			local hitEnt = tTraceRes.Entity;
 			
 			if( tTraceRes.HitWorld ) then
@@ -68,9 +72,9 @@ function SWEP:PrimaryAttack( )
 				
 				if( SERVER ) then
 					local multiplier = GAMEMODE:GetHitboxMulti( tTraceRes.HitGroup )
-					hitEnt:TakeDamage( 25 * multiplier, self.Owner, self.Weapon )
+					hitEnt:TakeDamage( 35 * multiplier, self.Owner, self.Weapon )
 					
-					if( 25 * multiplier >= hitEnt:Health() ) then
+					if( 35 * multiplier >= hitEnt:Health() ) then
 						bKillAnim = true;
 					end
 				end

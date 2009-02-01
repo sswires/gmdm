@@ -10,7 +10,7 @@ PlayerPanel.ExtraColumns = {}
 PlayerPanel.ExtraColumns[1] = {
 			header = "Souls",
 			valuefunc = function( pl ) return pl:GetNetworkedInt( "Souls", 0 ) end,
-			shoulddraw = function() if( gmdm_soulcollector:GetBool() ) then return true end return false end,
+			shoulddraw = function() if( gmdm_soulcollector and gmdm_soulcollector:GetBool() ) then return true end return false end,
 		};
 		
 function GM:RegisterScoreboardColumn( header, valuefunc, shoulddrawfunc, width )
