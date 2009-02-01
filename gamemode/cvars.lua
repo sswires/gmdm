@@ -86,27 +86,47 @@ function GM:ServerCvarChanged( name, oldval, newval )
 end
 
 -- shitty macro for this sort of thing
-function CreateGMDMConvar( var, value, prefix )
+if( SERVER ) then
+	function CreateGMDMConvar( var, value, prefix )
+			
+		if( prefix == nil ) then
+			prefix = "gmdm"
+		end
+		
+		Msg( "[GMDM] Registered SERVER console variable " .. prefix .. "_" .. var .. "\n" );
 
-	if( prefix == nil ) then
-		prefix = "gmdm"
+		local ret = CreateConVar( prefix .. "_" .. var, tostring( value ), FCVAR_GAMEDLL | FCVAR_NOTIFY | FCVAR_REPLICATED | FCVAR_ARCHIVE | FCVAR_DEMO );
+			
+		cvars.AddChangeCallback( prefix .. "_" .. var, CvarCallback );
+		--local ret = GetConVar( prefix .. "_" .. var );
+		
+		if( !ret ) then
+			Msg( "[GMDM] Unable to register cvar " .. prefix .. "_" .. var .. "\n" );
+		end
+	
+		return ret;
 	end
-	
-	Msg( "[GMDM] Registered console variable " .. prefix .. "_" .. var .. " (SERVER: " .. tostring( SERVER ) .. ")\n" );
-	
-	cvars.AddChangeCallback( prefix .. "_" .. var, CvarCallback );
-	if( CLIENT ) then
+end
+
+if( CLIENT ) then
+	function CreateGMDMConvar( var, value, prefix )
+			
+		if( prefix == nil ) then
+			prefix = "gmdm"
+		end
+		
+		Msg( "[GMDM] Registered CLIENT console variable " .. prefix .. "_" .. var .. "\n" );
+
 		local ret = GetConVar( prefix .. "_" .. var );
+		cvars.AddChangeCallback( prefix .. "_" .. var, CvarCallback );
+		
+		if( !ret ) then
+			Msg( "[GMDM] Unable to register cvar " .. prefix .. "_" .. var .. "\n" );
+		end
+		
+		table.insert( GameInfo, ret );
+		return ret;
 	end
-	
-	local ret = CreateConVar( prefix .. "_" .. var, tostring( value ), { FCVAR_NOTIFY, FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_GAMEDLL } );
-
-	if( !ret and CLIENT ) then
-		Msg( "[GMDM] Unable to register cvar " .. prefix .. "_" .. var .. " on client\n" );
-	end
-	
-	table.insert( GameInfo, ret );
-	return ret;
 end
 
 function GM:DoConVars()
