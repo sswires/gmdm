@@ -66,7 +66,7 @@ function GM:PlayerBindPress( pl, bind, down )
 end
 
 function GM:PostProcessPermitted( name )
-	return false
+	return true
 end
 
 local matPickup = Material( "sprites/pickup_cloud" )

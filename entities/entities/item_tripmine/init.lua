@@ -6,6 +6,8 @@ include('shared.lua')
 
 local sndStick = Sound( "physics/metal/sawblade_stick3.wav" )
 
+ENT.Remote = false;
+
 /*---------------------------------------------------------
    Name: Initialize
 ---------------------------------------------------------*/
@@ -82,7 +84,12 @@ function ENT:StartTripmineMode( hitpos, forward )
 	util.Effect( "Sparks", effectdata )
 end
 
-function ENT:Explode( )
+function ENT:Explode( remote )
+
+	if( remote ) then
+		self.Remote = remote;
+	end
+	
 	if self.Exploded then return end
 	
 	self.Exploded = true

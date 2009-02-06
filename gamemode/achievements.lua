@@ -1,19 +1,28 @@
---[[EXAMPLES
+-- achievements enum
+ACH_THUNDERSTRUCK = 1;
+ACH_DEMOLITIONS = 2;
 
-function FallHook(ply,attacker,dmg)
-	if dmg:IsFallDamage() then
-		ply:AddAchievement(ACH_FALL)
+-- achievements
+function ThunderstruckHook( ply, attacker, dmginfo )
+	
+	local inflictor = dmginfo:GetInflictor()
+	
+	if attacker:IsPlayer() and inflictor and inflictor:GetClass() == "grenade_electricity"  then
+		ply:AddAchievementID( ACH_THUNDERSTRUCK );
 	end
 end
 
-function FirstBloodHook(ply,attacker,dmg)
-	if attacker:IsPlayer() then
-		ply:AddAchievement(ACH_FIRSTBLOOD)
+Achievements.Create( "Thunderstruck", "Kill 30 enemies with the electricity nade.", ACH_THUNDERSTRUCK, ThunderstruckHook, "DoPlayerDeath", 30 );
+
+function DemolitionsHook( ply, attacker, dmginfo )
+	
+	local inflictor = dmginfo:GetInflictor()
+	
+	if attacker:IsPlayer() and inflictor and inflictor:GetClass() == "item_tripmine" and inflictor.Remote then
+		ply:AddAchievementID( ACH_DEMOLITIONS );
 	end
 end
 
-ACH_FALL = 1
-ACH_FIRSTBLOOD = 2
-Achievements.Create("Sidewalk Pizza","Die from falling off a high ledge.",ACH_FALL,FallHook,"DoPlayerDeath")
-Achievements.Create("First Blood","Kill an enemy.",ACH_FIRSTBLOOD,FirstBloodHook,"DoPlayerDeath")]]
+Achievements.Create( "Demolitions", "Kill 5 enemies with remotely detonated tripmine.", ACH_DEMOLITIONS, DemolitionsHook, "DoPlayerDeath", 5 );
 
+Achievements.Create( "Dead", "Die", 3, function( pl ) pl:AddAchievement( 3 ) end, "DoPlayerDeath" );

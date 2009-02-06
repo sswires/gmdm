@@ -87,7 +87,8 @@ function SWEP:Reload( )
 	
 	for k, v in pairs( tTripmines ) do
 		if( v:GetNetworkedEntity( "Thrower" ) == self.Owner and v.Laser and v.Laser:IsValid() and v.Laser.Activated == true and v.Laser:GetActiveTime( ) != 0 and v.Laser:GetActiveTime( ) < CurTime( ) ) then
-			v:Explode()
+			v.Remote = true;
+			v:Explode( true )
 			iCount = iCount + 1
 		end
 	end
