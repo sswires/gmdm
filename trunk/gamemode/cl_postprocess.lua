@@ -59,4 +59,4 @@ local function DrawInternal()
 
 end
 
-hook.Add( "RenderScreenspaceEffects", "GMDMPostProcess", DrawInternal )
+hook.Add( "RenderScreenspaceEffects", "RenderPostProcessing", DrawInternal )

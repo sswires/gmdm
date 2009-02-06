@@ -11,12 +11,12 @@ SWEP.ViewModel					= "models/weapons/v_thompson.mdl"
 SWEP.WorldModel					= "models/weapons/w_thompson.mdl"
 
 SWEP.Primary.Sound				= Sound( "Weapon_Thompson.Shoot" );
-SWEP.Primary.Recoil				= 0.65;
+SWEP.Primary.Recoil				= 0.18;
 SWEP.Primary.Damage				= 30;
 SWEP.Primary.NumShots			= 1;
 SWEP.Primary.Cone				= 0.08;
 SWEP.Primary.ClipSize			= 20;
-SWEP.Primary.Delay				= 0.10;
+SWEP.Primary.Delay				= 0.05;
 SWEP.Primary.DefaultClip		= 120;
 SWEP.Primary.Automatic			= true;
 SWEP.Primary.Ammo				= "smg1";

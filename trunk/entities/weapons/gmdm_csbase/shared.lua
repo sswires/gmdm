@@ -159,11 +159,11 @@ function SWEP:GetStanceAccuracyBonus( )
 	end
 	
 	if( speed > 10 ) then -- moving
-		Accuracy = Accuracy * ( ( ( 1 - speedperc ) + 0.1 ) / 2.5 );
+		Accuracy = Accuracy * ( ( ( 1 - speedperc ) + 0.1 ) / 1.5 );
 	end
 	
 	if( self.Owner:KeyDown( IN_DUCK ) == true ) then -- ducking moving forward
-		Accuracy = Accuracy * 1.75;
+		Accuracy = Accuracy * 1.50;
 	end
 
 	if( self.Owner:KeyDown( IN_LEFT ) or self.Owner:KeyDown( IN_RIGHT ) ) then -- just strafing

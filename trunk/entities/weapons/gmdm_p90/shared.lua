@@ -18,16 +18,16 @@ SWEP.ViewModel					= "models/weapons/v_smg_p90.mdl"
 SWEP.WorldModel					= "models/weapons/w_smg_p90.mdl"
 
 SWEP.Primary.Sound				= Sound( "Weapon_P90.Single" );
-SWEP.Primary.Recoil				= 0.09;
+SWEP.Primary.Recoil				= 0.24;
 SWEP.Primary.Damage				= 10.3;
 SWEP.Primary.NumShots			= 1;
-SWEP.Primary.Cone				= 0.043;
+SWEP.Primary.Cone				= 0.164;
 SWEP.Primary.ClipSize			= 50;
 SWEP.Primary.Delay				= 0.03;
 SWEP.Primary.DefaultClip		= 120;
 SWEP.Primary.Automatic			= true;
 SWEP.Primary.Ammo				= "smg1";
-SWEP.IronsightAccuracy			= 3.2;
+SWEP.IronsightAccuracy			= 1.2;
 
 SWEP.SprayAccuracy				= 0.9;
 SWEP.SprayTime					= 0.3;
@@ -108,9 +108,5 @@ function SWEP:DrawHUD()
 		Msg( tostring( ( EyePos() - trace.HitPos ):GetNormal() ) .. "\n")
 	end
 	
-	if( self.Weapon:GetNetworkedBool( "Ironsights", false ) == true and self.DrawCrosshair == true ) then
-		self.DrawCrosshair = false;
-	elseif( self.Weapon:GetNetworkedBool( "Ironsights", false ) == false and self.DrawCrosshair == false ) then
-		self.DrawCrosshair = true;
-	end
+	self:DrawCrosshairHUD()
 end
