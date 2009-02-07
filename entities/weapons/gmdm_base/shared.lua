@@ -221,7 +221,7 @@ function SWEP:RicochetCallback( bouncenum, attacker, tr, dmginfo )
 				effectdata:SetScale( dmginfo:GetDamage() / 10000 )
 			util.Effect( "hitsmoke", effectdata )
 			
-			util.Decal( "EnergyBall.Impact", tr.HitPos + tr.HitNormal, tr.HitPos + tr.HitNormal * -20 + VectorRand() * 15 )
+			--util.Decal( "EnergyBall.Impact", tr.HitPos + tr.HitNormal, tr.HitPos + tr.HitNormal * -20 + VectorRand() * 15 )
 			
 			if ( SERVER ) then
 				util.ScreenShake( tr.HitPos, 100, 0.2, 1, 128 )

@@ -22,10 +22,11 @@ SWEP.WorldModel					= "models/weapons/w_snip_scout.mdl"
 
 SWEP.Primary.ClipSize			= 7;
 SWEP.Primary.Recoil				= 0.85;
-SWEP.Primary.Damage				= 26;
+SWEP.Primary.Damage				= 32;
 SWEP.Primary.NumShots			= 1;
 SWEP.Primary.Cone				= 0.01;
 SWEP.Primary.Delay				= 1.5;
+SWEP.IronsightsFOV				= 25; -- HVA Specific
 
 SWEP.IronsightAccuracy			= 3.5; -- what to divide spread by to increase accuracy
 

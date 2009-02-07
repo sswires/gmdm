@@ -254,6 +254,15 @@ vgui.Register( "HUDBar_Easy", PANEL, "HUDBar_Item" )
 ------------------------------------------------------------*/
 
 PANEL = {}
+PANEL.LastFrameTime = 0;
+
+function PANEL:TimeChange( timel )
+	if( timel < 30 and timel > 0 ) then
+		LocalPlayer():EmitSound( GameSounds.Geiger[2] );
+	elseif( timel <= 60 and timel % 3 == 0 ) then
+		LocalPlayer():EmitSound( GameSounds.Geiger[1] );
+	end
+end
 
 function PANEL:GetText()
 		if( GetConVarNumber( "gmdm_timelimit" ) > 0 ) then
@@ -268,12 +277,18 @@ function PANEL:GetText()
 				else
 					iTimeTillEnd = iTimeLimit - fCurTime;
 					
-					if( iTimeTillEnd < 15 ) then
+					if( iTimeTillEnd <= 30 ) then
 						self.GetDrawColor = Color( 200, ( math.sin( CurTime() * 3 ) + 1.0 ) * 100, ( math.sin( CurTime() * 3 ) + 1.0 ) * 100 );
 					else
 						self.GetDrawColor = Color( 200, 200, 200 ) ;
 					end
 				end
+				
+				if( math.floor( iTimeTillEnd ) != self.LastFrameTime )  then
+					self:TimeChange( math.floor( iTimeTillEnd ))
+				end
+				
+				self.LastFrameTime = math.floor( iTimeTillEnd );
 			
 				return string.ToMinutesSeconds( iTimeTillEnd )
 			end

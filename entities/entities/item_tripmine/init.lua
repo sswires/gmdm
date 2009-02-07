@@ -96,7 +96,7 @@ function ENT:Explode( remote )
 	
 	local Forward = self.Entity:GetAngles( ):Forward( )
 
-	local ent = ents.Create( "env_explosion" )
+/*	local ent = ents.Create( "env_explosion" )
 	if ent and ent != NULL then
 		ent:SetPos( self.Entity:GetPos( ) + Forward * 16 )
 		ent:Spawn( )
@@ -110,12 +110,27 @@ function ENT:Explode( remote )
 		end
 		
 		ent:Fire( "Explode", 0, 0 )
+	end*/
+	
+	local damage = 250
+	local radius = 300
+	
+	if( self.BulletDamage ) then
+		damage = 360
+		radius = 325
 	end
+	
+	util.BlastDamage( self.Entity, self.Entity:GetNetworkedEntity( "Thrower" ), self.Entity:GetPos( ) + Forward * 16, radius, damage )
 	
 	local effectdata = EffectData( )
 		effectdata:SetOrigin( self.Entity:GetPos( ) + Forward * 16 )
 	util.Effect( "Super_Explosion", effectdata, true, true )
 
+	local effectdata = EffectData( )
+		effectdata:SetOrigin( self.Entity:GetPos( ) + Forward * 16 )
+	util.Effect( "gmdm_explosion", effectdata, true, true )
+	
+	self.Entity:EmitSound( ChooseRandom( GameSounds.BombExplosion ), 400 );
 	self.Entity:Remove( )
 end
 

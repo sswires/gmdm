@@ -83,9 +83,14 @@ if( CLIENT ) then
 		local fIronTime = self.fIronTime or 0
 		
 		if( bIron && CurTime() > fIronTime + self.ScopeTime ) then
+			local w = (ScrH()/3)*4
 			surface.SetDrawColor( 255, 255, 255, 255 );
 			surface.SetTexture( self.ScopeTexture );
-			surface.DrawTexturedRect( 0, 0, ScrW(), ScrH() );
+			surface.DrawTexturedRect( ( ScrW() / 2 ) - w/2, 0, w, ScrH() );
+			
+			surface.SetDrawColor( 0, 0, 0, 255 );
+			surface.DrawRect( 0, 0, ( ScrW() / 2 ) - w/2, ScrH() )
+			surface.DrawRect( ( ScrW() / 2 ) + w/2, 0, ScrW() - ( ( ScrW() / 2 ) + w/2 ), ScrH() )
 		end	
 	end
 	
@@ -102,6 +107,35 @@ function SWEP:GetViewModelPosition( pos, ang )
 	local SCOPE_TIME = self.ScopeTime;
 	
 	local bIron = self.Weapon:GetNetworkedBool( "Ironsights" )	
+
+	local vel = self.Owner:GetVelocity()
+				
+	if( self.LastOffset and !bIron ) then
+		if( vel.z == 0 and self.LastOffset != 0 ) then
+			if( !self.LastRestoreOffset ) then
+				self.LastRestoreOffset = self.LastOffset;
+			end
+			
+			local offset = math.Approach( self.LastRestoreOffset, 0, -0.5);
+			pos.z = pos.z - offset
+			
+			self.LastRestoreOffset = offset
+			
+			if( offset == 0 ) then
+				self.LastOffset = 0;
+				self.LastRestoreOffset = nil;
+			end
+		else
+			local offset = math.Clamp( vel.z / 50, -3, 2 )
+			pos.z = pos.z - offset
+				
+			self.LastOffset = offset
+			self.LastOffTime = CurTime()		
+		end
+	else
+		self.LastOffset = 0;
+	end
+	
 	local DashDelta = 0
 	
 	// If we're running, or have just stopped running, lerp between the 
