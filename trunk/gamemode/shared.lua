@@ -19,7 +19,7 @@ if( SERVER ) then
 end
 
 if( GM.IsSVN == true ) then
-	GM.Name 	= "GMDM Redux (SVN)"
+	GM.Name 	= "GMDM Redux SVN"
 else
 	GM.Name		= "GMDM Redux " .. GM.Version
 end
@@ -181,6 +181,12 @@ function GM:PlayerTraceAttack( ply, dmginfo, dir, trace )
 	
 	if( trace.HitGroup == HITGROUP_HEAD ) then
 		dmginfo:SetDamageForce( VectorRand() * 500 );
+		ply.Entity:EmitSound( ChooseRandom( GameSounds.HeadShot ), 500 );
+		
+		if( CLIENT and dmginfo:GetAttacker() and dmginfo:GetAttacker():IsPlayer() and LocalPlayer() == dmginfo:GetAttacker() ) then
+			LocalPlayer():EmitSound( ChooseRandom( GameSounds.HeadShot ), 200 );
+		end
+		
 		ply.Headshot = true;
 	else
 		ply.Headshot = false;

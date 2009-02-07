@@ -13,6 +13,7 @@ killicon.AddFont( "gmdm_crossbow", "HL2MPTypeDeath", "1", Color_Icon )
 killicon.AddFont( "flechette_shrapnel", "HL2MPTypeDeath", "1", Color_Icon )
 killicon.AddFont( "flechette_bolt", "HL2MPTypeDeath", "1", Color_Icon )
 killicon.AddFont( "env_explosion", "HL2MPTypeDeath", "*", Color_Icon )
+killicon.AddFont( "item_tripmine", "HL2MPTypeDeath", "*", Color_Icon )
 killicon.AddFont( "gmdm_tripmine", "HL2MPTypeDeath", "*", Color_Icon )
 killicon.AddFont( "smg_grenade", "HL2MPTypeDeath", "7", Color_Icon )
 killicon.AddFont( "grenade_electricity", "HL2MPTypeDeath", "4", Color_Icon )
@@ -84,7 +85,7 @@ local function RecvPlayerKilledSelf( message )
 	local victim 	= message:ReadEntity();			
 	
 	if( victim and victim:IsValid() ) then
-
+	
 		if( victim == LocalPlayer() ) then
 			GAMEMODE:SetLatestVictim( victim )
 		end
@@ -105,6 +106,10 @@ local function RecvPlayerKilled( message )
 	local victim 	= message:ReadEntity();
 	local inflictor	= message:ReadString();
 	local attacker 	= "#" .. message:ReadString();
+	
+	if( victim and victim == LocalPlayer() ) then
+		LocalPlayer():EmitSound( ChooseRandom( GameSounds.DeathMusic ) );
+	end
 			
 	GAMEMODE:AddDeathNotice( attacker, -1, inflictor, victim:Name(), victim:Team() )
 

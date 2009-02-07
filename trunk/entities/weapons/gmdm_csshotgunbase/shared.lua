@@ -11,6 +11,7 @@ SWEP.SprayAccuracy				= 0.65;
 SWEP.SprayTime					= 0.7;
 
 SWEP.HasIronsights				= true; -- HVA Specific
+SWEP.IronsightsFOV				= 65; -- HVA Specific
 
 SWEP.ReloadDelay				= 0.3;
 SWEP.ReloadThenPump				= true;

@@ -70,6 +70,8 @@ SWEP.IronsightDelayFOV			= false;
 SWEP.SprayAccuracy				= 0.8;
 SWEP.SprayTime					= 0.4;
 
+SWEP.ReloadSpeedMultiplier		= 1.0;
+
 -- HVA Run speed stuff
 SWEP.WalkSpeed					= 1.0;
 SWEP.RunSpeed					= 1.0;
@@ -125,6 +127,8 @@ end
 
 function SWEP:Reload()
 	if( self.Weapon:Clip1() < self.Primary.ClipSize ) then		
+		local timenow = CurTime();
+		
 		if( self.SupportsSilencer and self.Weapon:GetNetworkedBool( "Silenced", false ) ) then
 			self.Weapon:DefaultReload( ACT_VM_RELOAD_SILENCED );
 		else
@@ -133,6 +137,16 @@ function SWEP:Reload()
 		
 		self:SetIronsights( false );
 		self.Owner:SetFOV( 0, 0.25 );
+		
+		if( self.ReloadSpeedMultiplier != 1.0 ) then
+			local diff = self.Owner:GetViewModel():SequenceDuration();
+			
+			local newtime = diff/self.ReloadSpeedMultiplier;
+			
+			self.Owner:GetViewModel():SetPlaybackRate( self.ReloadSpeedMultiplier );
+			self.Weapon:SetNextPrimaryFire( CurTime())
+			self.Weapon:SetNextSecondaryFire( CurTime() )
+		end
 	end
 end
 
