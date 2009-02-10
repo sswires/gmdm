@@ -132,12 +132,12 @@ end
 function GM:DoConVars()
 	gmdm_headshotmode = CreateGMDMConvar( "headshotmode", "0" ); -- only headshots count
 	gmdm_instagib = CreateGMDMConvar( "instagib", "0" ); -- one hit kills mode
-	gmdm_hitindicators = CreateGMDMConvar( "hitindicators", "0" ); -- send hit indicators to client
+	gmdm_hitindicators = CreateGMDMConvar( "hitindicators", "1" ); -- send hit indicators to client
 	gmdm_ammodrops = CreateGMDMConvar( "ammodrops", "0" ); -- ammo drops when players die.
 	gmdm_friendlytripmines = CreateGMDMConvar( "friendlytripmines", "0" ); -- tripmines don't trigger when the owner of a tripmines walks through it
 	gmdm_activeweapondrop = CreateGMDMConvar( "activeweapondrop", "1" ); -- drop the currently active weapon
 	gmdm_teamplay = CreateGMDMConvar( "teamplay", "0" );
-	gmdm_forceautoassign = CreateGMDMConvar( "forceautoassign", "1" ); -- force auto assign for nubs
+	gmdm_forceautoassign = CreateGMDMConvar( "forceautoassign", "0" ); -- force auto assign for nubs
 	gmdm_spawnprotection = CreateGMDMConvar( "spawnprotection", "3" );
 	gmdm_unlimitedammo = CreateGMDMConvar( "unlimitedammo", "0" );
 	gmdm_bulletpenetration = CreateGMDMConvar( "bulletpenetration", "1" );
