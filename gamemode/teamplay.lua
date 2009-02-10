@@ -8,7 +8,7 @@ TEAM_RED			= 1004
 TEAM_BLUE			= 1005
 
 -- set ups
-team.SetUp( TEAM_FREEFORALL, "Free-for-all", Color( 200, 50, 50, 255 ) );
+team.SetUp( TEAM_FREEFORALL, "Free-for-all", Color( 0, 193, 0, 255 ) );
 team.SetUp( TEAM_RED, "Red Team", Color( 200, 50, 50, 255 ) );
 team.SetUp( TEAM_BLUE, "Blue Team", Color( 50, 50, 200, 255 ) );
 

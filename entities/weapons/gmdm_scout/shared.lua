@@ -20,7 +20,7 @@ SWEP.IsCSWeapon					= true;
 SWEP.ViewModel					= "models/weapons/v_snip_scout.mdl"
 SWEP.WorldModel					= "models/weapons/w_snip_scout.mdl"
 
-SWEP.Primary.ClipSize			= 7;
+SWEP.Primary.ClipSize			= 8;
 SWEP.Primary.Recoil				= 0.85;
 SWEP.Primary.Damage				= 32;
 SWEP.Primary.NumShots			= 1;
