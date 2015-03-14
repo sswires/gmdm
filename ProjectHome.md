@@ -1,0 +1,1 @@
+Gmode gamemode where you kill stuff, and that's about it.
